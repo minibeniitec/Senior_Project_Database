@@ -1,0 +1,29 @@
+/* Source:      Create_Tables.sql
+ * Author:              Benjamin A Garza III
+ * Date:                April 6, 2019
+ * Class:               CMPS 3420 - Databases
+ * Purpose:     Create all tables.
+ *
+ * Run:
+ *     psql -f Create_Tables.sql dionysusbrewingco dionysus
+ */
+
+
+CREATE TABLE IF NOT EXISTS Employee (
+        EmployeeID              serial primary key not null,
+        SSN                     integer UNIQUE not null,
+        FirstName               varchar(20) default 'John' not null,
+        MiddleName              varchar(20) default null,
+        LastName                varchar(20) default 'Doe' not null,
+        Birthday                date not null,
+        Position                varchar(30),
+        AddressID               integer references Addresses (AddressID) not null,
+        BreweryID               integer references Brewery (BreweryID) not null,
+        passwords               varchar (16) default 'secretpassword' not null,
+        CHECK                   (SSN > 0),
+        CHECK                   (SSN < 1000000000),
+        CHECK                   (EmployeeID > 0),
+        CHECK                   (Birthday < (current_date - integer '7665')),
+        Unique                  (SSN, FirstName, MiddleName, LastName, Birthday, AddressID, Position, BreweryID)
+)
+TABLESPACE DionysusData;
