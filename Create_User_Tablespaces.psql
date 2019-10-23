@@ -12,11 +12,11 @@ CREATE USER groupzero SUPERUSER PASSWORD 'BestProject2019' ;  -- create a role.
 
 CREATE TABLESPACE RestaurantData
          OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/RestaurantDatabase/';    -- The directories should be created before in postgres user
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project_Database/RestaurantDatabase/';    -- The directories should be created before in postgres user
  --      [ WITH ( tablespace_option = value [, ... ] ) ]
 CREATE TABLESPACE RestaurantIdx
          OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/RestaurantDatabase/RestaurantIdx/';     -- separate indexes from relations/tables
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project_Database/RestaurantDatabase/RestaurantIdx/';     -- separate indexes from relations/tables
  --      [ WITH ( tablespace_option = value [, ... ] ) ]
 
 CREATE DATABASE Restaurant
