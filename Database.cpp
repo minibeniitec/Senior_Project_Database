@@ -43,8 +43,11 @@ int getChoice() {
 
 int main() {
     int choice = 0;
+    cout << "Enter 0 for help\n";
     do {
         switch (choice) {
+	    case 0:
+		break;
             case 1: 
                 cout << "Creating User and Tablespaces:\n";
                 system("psql -f Create_User_Tablespaces.psql");
@@ -60,11 +63,11 @@ int main() {
                 break;
             case 4:
                 cout << "Dropping all tables:\n";
-                system("psql -f Drop_Tables.psql restaurant groupzero");
+                system("psql -f Drop_Tables.psql");
                 break;
             case 5:
                 cout << "Droping User and Tablespaces\n";
-                system("psql -f Drop_User_Tablespaces.psql restaurant groupzero");
+                system("psql -f Drop_User_Tablespaces.psql");
                 break;
             case 6:
                 cout << "Querying:\n";
@@ -77,8 +80,9 @@ int main() {
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("psql -f Drop_Tables.psql restaurant groupzero");
-                system("psql -f Drop_User_Tablespaces.psql restaurant groupzero");
+                system("psql -f Drop_Tables.psql");
+                system("psql -f Drop_User_Tablespaces.psql");
+		break;
             default:
                 cout << "Error: Please enter a valid option.";
         }

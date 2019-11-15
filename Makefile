@@ -1,4 +1,4 @@
-all: compile run clean push
+all: compile run clean
 
 compile: Database.cpp
 	g++ -Wall Database.cpp -o Database.out
