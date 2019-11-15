@@ -1,29 +1,86 @@
 /* Source:      Create_Tables.sql
- * Author:              Benjamin A Garza III
- * Date:                April 6, 2019
- * Class:               CMPS 3420 - Databases
+ * Author:      Benjamin A Garza III
+ * Date:        October 25, 2019
+ * Class:       CMPS 4910 - Senior Seminar I
  * Purpose:     Create all tables.
  *
  * Run:
- *     psql -f Create_Tables.sql dionysusbrewingco dionysus
+ *     psql -f Create_Tables.sql restaurant groupzero
  */
 
 
-CREATE TABLE IF NOT EXISTS Employee (
-        EmployeeID              serial primary key not null,
-        SSN                     integer UNIQUE not null,
-        FirstName               varchar(20) default 'John' not null,
-        MiddleName              varchar(20) default null,
-        LastName                varchar(20) default 'Doe' not null,
-        Birthday                date not null,
-        Position                varchar(30),
-        AddressID               integer references Addresses (AddressID) not null,
-        BreweryID               integer references Brewery (BreweryID) not null,
-        passwords               varchar (16) default 'secretpassword' not null,
-        CHECK                   (SSN > 0),
-        CHECK                   (SSN < 1000000000),
-        CHECK                   (EmployeeID > 0),
-        CHECK                   (Birthday < (current_date - integer '7665')),
-        Unique                  (SSN, FirstName, MiddleName, LastName, Birthday, AddressID, Position, BreweryID)
+CREATE TABLE IF NOT EXISTS Humans (
+        HumanID         serial primary key not null,
+        SSN             integer UNIQUE not null,
+        FirstName       varchar(20) default 'John' not null,
+        MiddleName      varchar(20) default null,
+        LastName        varchar(20) default 'Doe' not null,
+        Birthday        date default null,
+        Role            integer default 1, # 1-3 = Customer, Employee, Manager
+        CHECK           (Role > 0),
+        CHECK           (Role < 4),
+        CHECK           (SSN > 0),
+        CHECK           (SSN < 1000000000),
+        CHECK           (EmployeeID > 0),
+        CHECK           (Birthday < (current_date - integer '7665')),
+        Unique          (SSN, FirstName, MiddleName, LastName, Birthday, Role)
 )
-TABLESPACE DionysusData;
+TABLESPACE RestTablespace;
+
+
+
+CREATE TABLE IF NOT EXISTS Orders (
+        OrderID         serial primary key not null,
+        Date       	date default CURRENT_DATE not null,
+	CustomerID	integer references Human (HumanID) not null,
+	EmployeeID	integer references Human (HumanID) not null,
+        CHECK           (EmployeeID != CustomerID),
+        CHECK           (Date <= Current_Date)
+)
+TABLESPACE RestTablespace;
+
+
+
+CREATE TABLE IF NOT EXISTS Products (
+        ProductID       serial primary key not null,
+	ProductName	varchar(20) unique not null,
+	Price		float not null,
+	CHECK		(price >= 0.00),
+	CHECK		(price%0.01 == 0)
+)
+TABLESPACE RestTablespace;
+
+
+
+CREATE TABLE IF NOT EXISTS Timers (
+	TimerID		serial primary key not null,
+	Start		time not null default Current_Time,
+	End		time not null default null
+)
+TABLESPACE RestTablespace
+
+
+
+CREATE TABLE IF NOT EXISTS Items (
+        ItemID          serial primary key not null,
+	TimerID		references Timers (TimerID) not null,
+	ProductID	references Product (ProductID) not null,
+	Quantity	integer not null, default 1,
+	CHECK		(Quantity > 0)
+)
+TABLESPACE RestTablespace;
+
+
+
+#CREATE TABLE IF NOT EXISTS Parties (
+#        PartyID         serial primary key not null,
+#	OrderID		integer unique references Humans (HumanID) not null,
+#	Customer1	integer[] references Humans (HumanID) not null,
+# 	Quantity	integer not null, default 1,
+#	CHECK		(Quantity > 0)
+#	
+#)
+#TABLESPACE RestTablespace;
+
+
+

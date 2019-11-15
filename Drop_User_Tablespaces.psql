@@ -1,0 +1,14 @@
+/*  	Source: 	Drop_User_Tablespaces.psql
+ *	Author:		Benjamin A Garza III
+ *	Date:		November 14, 2019
+ *	Class:		CMPS 4910 - Senior Seminar I
+ *	Purpose: 	Drop database, tablespaces, and superuser.
+ *
+ *  Run:
+ *      psql -f Drop_User_Tablespaces.psql
+ */
+
+drop database if exists restaurant;
+drop tablespace if exists resttablespaceidx;
+drop tablespace if exists resttablespace;
+drop user if exists groupzero;

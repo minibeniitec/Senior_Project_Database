@@ -1,0 +1,15 @@
+/*  	Source: 	Drop_Tables.psql
+ *	Author:		Benjamin A Garza III
+ *	Date:		November 14, 2019
+ *	Class:		CMPS 4910 - Senior Seminar I
+ *	Purpose: 	Drop all tables.
+ *
+ *  Run:
+ *      psql -f Drop_Tables.psql restaurant grouper
+ */
+
+drop table if exists items;
+drop table if exists timers;
+drop table if exists products;
+drop table if exists orders;
+drop table if exists humans;

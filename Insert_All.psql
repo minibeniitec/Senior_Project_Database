@@ -1,0 +1,14 @@
+/*  	Source: 	Insert_All.psql
+ *	Author:		Benjamin A Garza III
+ *	Date:		November 14, 2019
+ *	Class:		CMPS 4910 - Senior Seminar I
+ *	Purpose: 	Insert tuples to all tables as dummy data.
+ *
+ *  Run:
+ *      psql -f Insert_All.psql restaurant groupzero
+ */
+
+INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('7747 academy', 'philadelphia', 'PA', '19367');
+INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('399 jones', 'hampton', 'VA', '23660');
+INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('5473 pearson', 'dayton', 'OH', '45364');
+INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('9703 52nd', 'chesapeake', 'VA', '23366');

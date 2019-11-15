@@ -1,25 +1,24 @@
 /*  Source:     Create_User_Tablespaces.sql
  *  Author:     Benjamin A Garza III
- *  Date:       April 6, 2019
- *  Class:      CMPS 3420 - Databases
+ *  Date:       October 23, 2019
+ *  Class:      CMPS 4910 - Senior Seminar I
  *  Purpose:    Create superuser, tablespaces, and database.
  *
  *  Run: (as admin/root)
- *  psql -f Create_User_Tablespaces.sql
+ *  psql -f Create_User_Tablespaces.psql
  */
 
-CREATE USER groupzero SUPERUSER PASSWORD 'BestProject2019' ;  -- create a role.
+CREATE USER groupzero SUPERUSER PASSWORD 'BestProject2019' ;  
 
-CREATE TABLESPACE RestaurantData
+CREATE TABLESPACE RestTablespace
          OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project_Database/RestaurantDatabase/';    -- The directories should be created before in postgres user
- --      [ WITH ( tablespace_option = value [, ... ] ) ]
-CREATE TABLESPACE RestaurantIdx
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/Database/';
+
+CREATE TABLESPACE RestTablespaceIdx
          OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project_Database/RestaurantDatabase/RestaurantIdx/';     -- separate indexes from relations/tables
- --      [ WITH ( tablespace_option = value [, ... ] ) ]
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/Database/Idx/';
 
 CREATE DATABASE Restaurant
         OWNER groupzero
-        TABLESPACE = RestaurantData;
+        TABLESPACE = RestDatabase;
 
