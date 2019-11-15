@@ -63,7 +63,7 @@ int main() {
                 break;
             case 4:
                 cout << "Dropping all tables:\n";
-                system("psql -f Drop_Tables.psql");
+                system("psql -f Drop_Tables.psqli restaurant groupzero");
                 break;
             case 5:
                 cout << "Droping User and Tablespaces\n";
@@ -80,7 +80,7 @@ int main() {
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("psql -f Drop_Tables.psql");
+                system("psql -f Drop_Tables.psql restaurant groupzero");
                 system("psql -f Drop_User_Tablespaces.psql");
 		break;
             default:

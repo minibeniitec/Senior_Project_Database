@@ -12,4 +12,4 @@ drop table if exists items;
 drop table if exists timers;
 drop table if exists products;
 drop table if exists orders;
-drop table if exists humans;
+drop table if exists human;
