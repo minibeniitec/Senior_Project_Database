@@ -1,14 +1,13 @@
 all: compile run clean
 
 compile: Database.cpp
-	g++ -Wall Database.cpp -o Database.out
+	g++ -Wall Database.cpp -o Db.out
 
-run: Database.out
-	./Database.out
+run: Db.out
+	./Db.out
 
 clean:
 	rm -rf *.out
-
 
 push: .git
 	git add .

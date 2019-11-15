@@ -13,8 +13,9 @@ Step 2: Modify the file
 		After:  /home/egonzalez/Desktop/Senior_Project...
 
 Step 3: Run make
-	Within the PSQL folder is a make file along with a C++ program. Run 
-	the make command and it will compile and run the program and clean 
+	The make command and it will compile and run the program and clean 
 	up after automatically.
 
-	Within the program you can follow the menu.
+	Within the program you can follow the menu. You can build the db, 
+	automatically fill it with fake data, and destroy it within the 
+	program.

@@ -50,38 +50,38 @@ int main() {
 		break;
             case 1: 
                 cout << "Creating User and Tablespaces:\n";
-                system("psql -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -f Create_User_Tablespaces.psql");
                 break;
             case 2:
                 cout << "Creating Tables:\n";
-                system("psql -f Create_Tables.psql restaurant  groupzero");
+                system("cd PSQL; psql -f Create_Tables.psql restaurant  groupzero");
                 break;
             case 3:
 	    case 8:
                 cout << "Inserting defualt tuples into all tables:\n";
-                system("psql -f Insert_All.psql restaurant groupzero");
+                system("cd PSQL; psql -f Insert_All.psql restaurant groupzero");
                 break;
             case 4:
                 cout << "Dropping all tables:\n";
-                system("psql -f Drop_Tables.psqli restaurant groupzero");
+                system("cd PSQL; psql -f Drop_Tables.psqli restaurant groupzero");
                 break;
             case 5:
                 cout << "Droping User and Tablespaces\n";
-                system("psql -f Drop_User_Tablespaces.psql");
+                system("cd PSQL; psql -f Drop_User_Tablespaces.psql");
                 break;
             case 6:
                 cout << "Querying:\n";
-                system("psql -f Query_All.psql restaurant groupzero");
+                system("cd PSQL; psql -f Query_All.psql restaurant groupzero");
                 break;
 	    case 7:
                 cout << "Setting Up Database:\n";
-                system("psql -f Create_User_Tablespaces.psql");
-                system("psql -f Create_Tables.psql restaurant  groupzero");
+                system("cd PSQL; psql -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -f Create_Tables.psql restaurant  groupzero");
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("psql -f Drop_Tables.psql restaurant groupzero");
-                system("psql -f Drop_User_Tablespaces.psql");
+                system("cd PSQL; psql -f Drop_Tables.psql restaurant groupzero");
+                system("cd PSQL; psql -f Drop_User_Tablespaces.psql");
 		break;
             default:
                 cout << "Error: Please enter a valid option.";
