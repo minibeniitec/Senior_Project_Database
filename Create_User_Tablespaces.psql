@@ -20,5 +20,5 @@ CREATE TABLESPACE RestTablespaceIdx
 
 CREATE DATABASE Restaurant
         OWNER groupzero
-        TABLESPACE = RestDatabase;
+        TABLESPACE = resttablespace;
 

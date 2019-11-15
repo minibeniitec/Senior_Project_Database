@@ -84,7 +84,7 @@ int main() {
         }
         printMenu();
         choice = getChoice();
-    } while (choice != 7);
+    } while (choice != 10);
 
     return 0;
 }
