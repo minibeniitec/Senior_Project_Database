@@ -8,7 +8,27 @@
  *      psql -f Insert_All.psql restaurant groupzero
  */
 
-INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('7747 academy', 'philadelphia', 'PA', '19367');
-INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('399 jones', 'hampton', 'VA', '23660');
-INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('5473 pearson', 'dayton', 'OH', '45364');
-INSERT INTO Addresses (Street, City, State, ZIP) VALUES ('9703 52nd', 'chesapeake', 'VA', '23366');
+INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456789, 'Benjamin', 'Garza'   , 3);
+INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456788, 'Edwin'   , 'Gonzalez', 2);
+INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456787, 'Belle'   , 'Cruz'    , 1);
+INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456786, 'Victor'  , 'Santiago', 1);
+
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (2, 1);
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (3, 1);
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (4, 1);
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (1, 2);
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (3, 2);
+INSERT INTO Orders (CustomerID, EmployeeID) VALUES (4, 2);
+
+INSERT INTO Products (ProductName, Price) VALUES ('Hamburger'   , 1.00);
+INSERT INTO Products (ProductName, Price) VALUES ('Cheeseburger', 1.10);
+
+INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (1, 1, 1);
+INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (2, 2, 1);
+INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (1, 3, 1);
+INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (2, 4, 1);
+
+INSERT INTO Timers (ItemID) VALUES (1);
+INSERT INTO Timers (ItemID) VALUES (2);
+INSERT INTO Timers (ItemID) VALUES (3);
+INSERT INTO Timers (ItemID) VALUES (4);

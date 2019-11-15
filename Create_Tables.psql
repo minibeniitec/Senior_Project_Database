@@ -51,23 +51,25 @@ TABLESPACE RestTablespace;
 
 
 
+CREATE TABLE IF NOT EXISTS Items (
+        ItemID          serial primary key not null,
+	ProductID	integer references Products (ProductID) not null,
+	OrderID		integer references Items (ItemID) not null,
+	Quantity	integer not null default 1,
+	CHECK		(Quantity > 0)
+)
+TABLESPACE RestTablespace;
+
+
+
 CREATE TABLE IF NOT EXISTS Timers (
 	TimerID		serial primary key not null,
+	ItemID		integer references Items (ItemID) not null,
 	Start		time not null default Current_Time,
 	EndTime		time default null
 )
 TABLESPACE RestTablespace;
 
-
-
-CREATE TABLE IF NOT EXISTS Items (
-        ItemID          serial primary key not null,
-	TimerID		integer references Timers (TimerID) not null,
-	ProductID	integer references Products (ProductID) not null,
-	Quantity	integer not null default 1,
-	CHECK		(Quantity > 0)
-)
-TABLESPACE RestTablespace;
 
 
 /*
