@@ -54,16 +54,16 @@ int main() {
                 break;
             case 2:
                 cout << "Creating Tables:\n";
-                system("cd PSQL; psql -f Create_Tables.psql TheDatabase benjamin");
+                system("cd PSQL; psql -f Create_Tables.psql TheDatabase minibeniitec");
                 break;
             case 3:
 	    case 8:
                 cout << "Inserting defualt tuples into all tables:\n";
-                system("cd PSQL; psql -f Insert_All.psql TheDatabase benjamin");
+                system("cd PSQL; psql -f Insert_All.psql TheDatabase minibeniitec");
                 break;
             case 4:
                 cout << "Dropping all tables:\n";
-                system("cd PSQL; psql -f Drop_Tables.psqli TheDatabase benjamin");
+                system("cd PSQL; psql -f Drop_Tables.psqli TheDatabase minibeniitec");
                 break;
             case 5:
                 cout << "Droping User and Tablespaces\n";
@@ -71,16 +71,16 @@ int main() {
                 break;
             case 6:
                 cout << "Querying:\n";
-                system("cd PSQL; psql -f Query_All.psql TheDatabase benjain");
+                system("cd PSQL; psql -f Query_All.psql TheDatabase minibeniitec");
                 break;
 	    case 7:
                 cout << "Setting Up Database:\n";
                 system("cd PSQL; psql -f Create_User_Tablespaces.psql");
-                system("cd PSQL; psql -f Create_Tables.psql TheDatabase  benjamin");
+                system("cd PSQL; psql -f Create_Tables.psql TheDatabase minibeniitec");
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("cd PSQL; psql -f Drop_Tables.psql TheDatabase benjamin");
+                system("cd PSQL; psql -f Drop_Tables.psql TheDatabase");
                 system("cd PSQL; psql -f Drop_User_Tablespaces.psql");
 		break;
             default:

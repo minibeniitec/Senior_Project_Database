@@ -9,18 +9,19 @@
  *      psql -f Insert_All.psql TheDatabase minibeniitec
  */
 
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Benjamin', 'Garza'   , 4, 123456789);
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Edwin'   , 'Gonzalez', 4, 123456788);
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Mabelle' , 'Cruz'    , 4, 123456787);
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Victor'  , 'Santiago', 4, 123456786);
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Guest'   , 'Stranger', 1, 123456786);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Benjamin', 'Garza'   , 123456789);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Edwin'   , 'Gonzalez', 123456788);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Mabelle' , 'Cruz'    , 123456787);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Victor'  , 'Santiago', 123456786);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (1, 'Guest'   , 'Stranger', 123456786);
 
 
-INSERT INTO Timers;
-INSERT INTO Timers;
-INSERT INTO Timers;
-INSERT INTO Timers;
-INSERT INTO Timers;
+
+INSERT INTO Timers (Start) VALUES (current_time);
+INSERT INTO Timers (Start) VALUES (current_time);
+INSERT INTO Timers (Start) VALUES (current_time);
+INSERT INTO Timers (Start) VALUES (current_time);
+INSERT INTO Timers (Start) VALUES (current_time);
 
 
 INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (1, 5, 1);
@@ -32,8 +33,8 @@ INSERT INTO Waves (TimerID) VALUES (4);
 INSERT INTO Waves (TimerID) VALUES (5);
 
 
-INSERT INTO Products (ProductName, Price) VALUES ('Hamburger'   , 1.00);
-INSERT INTO Products (ProductName, Price) VALUES ('Cheeseburger', 1.10);
+INSERT INTO Products (Name, Price) VALUES ('Hamburger'   , 1.00);
+INSERT INTO Products (Name, Price) VALUES ('Cheeseburger', 1.10);
 
 
 INSERT INTO Items (Quantity , ProductID, WaveID) VALUES (1, 1, 1);

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Humans (
         CHECK           (SSN < 1000000000),
         CHECK           (HumanID > 0),
         CHECK           (Birthday < (current_date - integer '7665')),
-        Unique          (SSN, FirstName, MiddleName, LastName, Birthday, Position)
+        Unique          (SSN, FirstName, LastName, Birthday, Position)
 )
 TABLESPACE TheTablespace;
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Orders (
         Date       	date default CURRENT_DATE not null,
 	CustomerID	integer references Humans (HumanID) not null,
 	EmployeeID	integer references Humans (HumanID) not null,
-	TimerID		unique integer references Timers (TimerID) not null,
+	TimerID		integer references Timers (TimerID) not null,
         CHECK           (EmployeeID != CustomerID),
         CHECK           (Date <= Current_Date)
 )
@@ -53,7 +53,8 @@ TABLESPACE TheTablespace;
 
 CREATE TABLE IF NOT EXISTS Waves (
         WaveID          serial primary key not null,
-	TimerID		unique integer references Timers (TimerID) not null
+	TimerID		integer references Timers (TimerID) not null,
+	CHECK		(WaveID > 0)
 )
 TABLESPACE TheTablespace;
 
