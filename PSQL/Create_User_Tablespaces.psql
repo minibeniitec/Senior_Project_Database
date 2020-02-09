@@ -9,20 +9,20 @@
  */
 
 CREATE TABLESPACE TheTablespace
-         OWNER minibeniitec
-         --OWNER benjamin
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/';
-         --LOCATION '/home/benjamin/Senior_Project/TheTablespace/';
+         --OWNER minibeniitec
+         OWNER benjamin
+         --LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/';
+         LOCATION '/home/benjamin/Senior_Project/TheTablespace/';
 
 
 CREATE TABLESPACE TheTablespaceIndex
-         OWNER minibeniitec
-         --OWNER benjamin
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/TheTablespaceIndex/';
-         --LOCATION '/home/benjamin/Senior_Project/TheTablespace/TheTablespaceIndex/';
+         --OWNER minibeniitec
+         OWNER benjamin
+         --LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/TheTablespaceIndex/';
+         LOCATION '/home/benjamin/Senior_Project/TheTablespace/TheTablespaceIndex/';
 
 CREATE DATABASE TheDatabase
-        OWNER minibeniitec
-        --OWNER benjamin
+        --OWNER minibeniitec
+        OWNER benjamin
         TABLESPACE = TheTablespace;
 
