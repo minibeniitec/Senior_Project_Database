@@ -1,5 +1,10 @@
 all: compile run clean
 
+first:
+	mkdir TheTablespace
+	mkdir TheTablespaceIndex
+	mv TheTablespaceIndex TheTablespace
+
 compile: Database.cpp
 	g++ -Wall Database.cpp -o Db.out
 
