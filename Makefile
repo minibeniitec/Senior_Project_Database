@@ -3,6 +3,7 @@ all: compile run clean
 first:
 	mkdir TheTablespace
 	mkdir TheTablespaceIndex
+	chmod 0700 TheTable*
 	mv TheTablespaceIndex TheTablespace
 
 compile: Database.cpp
