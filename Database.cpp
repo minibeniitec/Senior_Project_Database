@@ -6,6 +6,7 @@
  *
  *  Compile:
  *      g++ Database.cpp -o Database
+ *
  */
 
 #include <iostream>
@@ -50,38 +51,38 @@ int main() {
 		break;
             case 1: 
                 cout << "Creating User and Tablespaces:\n";
-                system("cd PSQL; psql -D postgres -U benjamin -h localhost -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -d postgres -U benjamin -h localhost -f Create_User_Tablespaces.psql");
                 break;
             case 2:
                 cout << "Creating Tables:\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Create_Tables.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Create_Tables.psql");
                 break;
             case 3:
 	    case 8:
                 cout << "Inserting defualt tuples into all tables:\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Insert_All.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Insert_All.psql");
                 break;
             case 4:
                 cout << "Dropping all tables:\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Drop_Tables.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_Tables.psql");
                 break;
             case 5:
                 cout << "Droping User and Tablespaces\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
                 break;
             case 6:
                 cout << "Querying:\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Query_All.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Query_All.psql");
                 break;
 	    case 7:
                 cout << "Setting Up Database:\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Create_User_Tablespaces.psql");
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Create_Tables.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Create_Tables.psql");
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Drop_Tables.psql");
-                system("cd PSQL; psql -D TheDatabase -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_Tables.psql");
+                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
 		break;
             default:
                 cout << "Error: Please enter a valid option.";
