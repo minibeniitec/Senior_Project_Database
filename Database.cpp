@@ -76,13 +76,13 @@ int main() {
                 break;
 	    case 7:
                 cout << "Setting Up Database:\n";
-                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -d postgres -U benjamin -h localhost -f Create_User_Tablespaces.psql");
                 system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Create_Tables.psql");
                 break;
             case 9:
 		cout << "Destroying database...\n";
-                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_Tables.psql");
-                system("cd PSQL; psql -d TheDatabase -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
+                system("cd PSQL; psql -d postgres -U benjamin -h localhost -f Drop_Tables.psql");
+                system("cd PSQL; psql -d postgres -U benjamin -h localhost -f Drop_User_Tablespaces.psql");
 		break;
             default:
                 cout << "Error: Please enter a valid option.";
