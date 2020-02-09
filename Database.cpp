@@ -50,7 +50,7 @@ int main() {
 		break;
             case 1: 
                 cout << "Creating User and Tablespaces:\n";
-                system("cd PSQL; psql -f Create_User_Tablespaces.psql");
+                system("cd PSQL; psql -D postgres -f Create_User_Tablespaces.psql");
                 break;
             case 2:
                 cout << "Creating Tables:\n";
