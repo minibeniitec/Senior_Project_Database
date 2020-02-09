@@ -1,87 +1,82 @@
 /* Source:      Create_Tables.sql
  * Author:      Benjamin A Garza III
- * Date:        October 25, 2019
- * Class:       CMPS 4910 - Senior Seminar I
+ * Date:        February 8, 2020
+ * Class:       CMPS 4928 - Senior Seminar II
  * Purpose:     Create all tables.
  *
  * Run:
- *     psql -f Create_Tables.sql restaurant groupzero
+ *     psql -f Create_Tables.sql TheDatabase minibeniitec
+ *     psql -f Create_Tables.sql TheDatabase benjamin
  */
 
 
-CREATE TABLE IF NOT EXISTS Human (
+CREATE TABLE IF NOT EXISTS Humans (
         HumanID         serial primary key not null,
-        SSN             integer UNIQUE not null,
         FirstName       varchar(20) default 'John' not null,
-        MiddleName      varchar(20) default null,
         LastName        varchar(20) default 'Doe' not null,
         Birthday        date default null,
-        Role            integer default 1, -- 1-3 = Customer, Employee, Manager
-        CHECK           (Role > 0),
-        CHECK           (Role < 4),
+        Position	integer default 1 not null, 	-- 1-4 = Customer, Host, Employee, Manager
+	SSN		integer not null 
+        CHECK           (Position > 0),
+        CHECK           (Position < 5),
         CHECK           (SSN > 0),
         CHECK           (SSN < 1000000000),
         CHECK           (HumanID > 0),
         CHECK           (Birthday < (current_date - integer '7665')),
-        Unique          (SSN, FirstName, MiddleName, LastName, Birthday, Role)
+        Unique          (SSN, FirstName, MiddleName, LastName, Birthday, Position)
 )
-TABLESPACE RestTablespace;
+TABLESPACE TheTablespace;
+
+
+
+CREATE TABLE IF NOT EXISTS Timers (
+	TimerID		serial primary key not null,
+	Start		time not null default Current_Time,
+	EndTime		time default null
+)
+TABLESPACE TheTablespace;
 
 
 
 CREATE TABLE IF NOT EXISTS Orders (
         OrderID         serial primary key not null,
         Date       	date default CURRENT_DATE not null,
-	CustomerID	integer references Human (HumanID) not null,
-	EmployeeID	integer references Human (HumanID) not null,
+	CustomerID	integer references Humans (HumanID) not null,
+	EmployeeID	integer references Humans (HumanID) not null,
+	TimerID		unique integer references Timers (TimerID) not null,
         CHECK           (EmployeeID != CustomerID),
         CHECK           (Date <= Current_Date)
 )
-TABLESPACE RestTablespace;
+TABLESPACE TheTablespace;
+
+
+
+CREATE TABLE IF NOT EXISTS Waves (
+        WaveID          serial primary key not null,
+	TimerID		unique integer references Timers (TimerID) not null
+)
+TABLESPACE TheTablespace;
 
 
 
 CREATE TABLE IF NOT EXISTS Products (
         ProductID       serial primary key not null,
-	ProductName	varchar(20) unique not null,
+	Name		varchar(20) unique not null,
 	Price		money not null,
 	CHECK		(price::numeric >= 0.00)
 )
-TABLESPACE RestTablespace;
+TABLESPACE TheTablespace;
 
 
 
 CREATE TABLE IF NOT EXISTS Items (
         ItemID          serial primary key not null,
-	ProductID	integer references Products (ProductID) not null,
-	OrderID		integer references Items (ItemID) not null,
 	Quantity	integer not null default 1,
+	ProductID	integer references Products (ProductID) not null,
+	WaveID		integer references Waves (WaveID) not null,
 	CHECK		(Quantity > 0)
 )
-TABLESPACE RestTablespace;
+TABLESPACE TheTablespace;
 
-
-
-CREATE TABLE IF NOT EXISTS Timers (
-	TimerID		serial primary key not null,
-	ItemID		integer references Items (ItemID) not null,
-	Start		time not null default Current_Time,
-	EndTime		time default null
-)
-TABLESPACE RestTablespace;
-
-
-
-/*
-CREATE TABLE IF NOT EXISTS Parties (
-        PartyID         serial primary key not null,
-	OrderID		integer unique references Humans (HumanID) not null,
-	Customer1	integer[] references Humans (HumanID) not null,
- 	Quantity	integer not null, default 1,
-	CHECK		(Quantity > 0)
-	
-)
-TABLESPACE RestTablespace;
-*/
 
 

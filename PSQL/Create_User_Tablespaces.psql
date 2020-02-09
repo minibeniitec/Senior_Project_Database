@@ -1,24 +1,28 @@
 /*  Source:     Create_User_Tablespaces.sql
  *  Author:     Benjamin A Garza III
- *  Date:       October 23, 2019
- *  Class:      CMPS 4910 - Senior Seminar I
- *  Purpose:    Create superuser, tablespaces, and database.
+ *  Date:       February 8, 2020
+ *  Class:      CMPS 4928 - Senior Seminar II
+ *  Purpose:    Create tablespaces and database.
  *
  *  Run: (as admin/root)
  *  psql -f Create_User_Tablespaces.psql
  */
 
-CREATE USER groupzero SUPERUSER PASSWORD 'BestProject2019' ;  
+CREATE TABLESPACE TheTablespace
+         OWNER minibeniitec
+         --OWNER benjamin
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/';
+         --LOCATION '/home/benjamin/Senior_Project/TheTablespace/';
 
-CREATE TABLESPACE RestTablespace
-         OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/Database/';
 
-CREATE TABLESPACE RestTablespaceIdx
-         OWNER groupzero
-         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/Database/Idx/';
+CREATE TABLESPACE TheTablespaceIndex
+         OWNER minibeniitec
+         --OWNER benjamin
+         LOCATION '/Users/minibeniitec/Desktop/Senior_Project/TheTablespace/TheTablespaceIndex/';
+         --LOCATION '/home/benjamin/Senior_Project/TheTablespace/TheTablespaceIndex/';
 
-CREATE DATABASE Restaurant
-        OWNER groupzero
-        TABLESPACE = resttablespace;
+CREATE DATABASE TheDatabase
+        OWNER minibeniitec
+        --OWNER benjamin
+        TABLESPACE = TheTablespace;
 

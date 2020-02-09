@@ -1,34 +1,42 @@
 /*  	Source: 	Insert_All.psql
  *	Author:		Benjamin A Garza III
- *	Date:		November 14, 2019
- *	Class:		CMPS 4910 - Senior Seminar I
+ *	Date:		February 8, 2020
+ *	Class:		CMPS 4928 - Senior Seminar II
  *	Purpose: 	Insert tuples to all tables as dummy data.
  *
  *  Run:
- *      psql -f Insert_All.psql restaurant groupzero
+ *      psql -f Insert_All.psql TheDatabase benjamin
+ *      psql -f Insert_All.psql TheDatabase minibeniitec
  */
 
-INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456789, 'Benjamin', 'Garza'   , 3);
-INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456788, 'Edwin'   , 'Gonzalez', 2);
-INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456787, 'Belle'   , 'Cruz'    , 1);
-INSERT INTO Human (SSN, FirstName, LastName, Role) VALUES (123456786, 'Victor'  , 'Santiago', 1);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Benjamin', 'Garza'   , 4, 123456789);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Edwin'   , 'Gonzalez', 4, 123456788);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Mabelle' , 'Cruz'    , 4, 123456787);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Victor'  , 'Santiago', 4, 123456786);
+INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES ('Guest'   , 'Stranger', 1, 123456786);
 
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (2, 1);
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (3, 1);
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (4, 1);
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (1, 2);
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (3, 2);
-INSERT INTO Orders (CustomerID, EmployeeID) VALUES (4, 2);
+
+INSERT INTO Timers;
+INSERT INTO Timers;
+INSERT INTO Timers;
+INSERT INTO Timers;
+INSERT INTO Timers;
+
+
+INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (1, 5, 1);
+INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (2, 5, 2);
+
+
+INSERT INTO Waves (TimerID) VALUES (3);
+INSERT INTO Waves (TimerID) VALUES (4);
+INSERT INTO Waves (TimerID) VALUES (5);
+
 
 INSERT INTO Products (ProductName, Price) VALUES ('Hamburger'   , 1.00);
 INSERT INTO Products (ProductName, Price) VALUES ('Cheeseburger', 1.10);
 
-INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (1, 1, 1);
-INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (2, 2, 1);
-INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (1, 3, 1);
-INSERT INTO Items (ProductID, OrderID, Quantity) VALUES (2, 4, 1);
 
-INSERT INTO Timers (ItemID) VALUES (1);
-INSERT INTO Timers (ItemID) VALUES (2);
-INSERT INTO Timers (ItemID) VALUES (3);
-INSERT INTO Timers (ItemID) VALUES (4);
+INSERT INTO Items (Quantity , ProductID, WaveID) VALUES (1, 1, 1);
+INSERT INTO Items (Quantity , ProductID, WaveID) VALUES (1, 2, 1);
+INSERT INTO Items (Quantity , ProductID, WaveID) VALUES (7, 2, 2);
+INSERT INTO Items (Quantity , ProductID, WaveID) VALUES (2, 1, 3);
