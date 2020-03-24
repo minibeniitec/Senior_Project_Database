@@ -1,9 +1,9 @@
 \o SampleData.txt
 
 Select * from Humans;
-Select * from Timers;
+Select * from Tables;
 Select * from Orders;
-Select * from Waves;
+Select * from TableVisits;
 Select * from Products;
 Select * from Items;
 

@@ -1,18 +1,31 @@
-all: compile run clean
+# Must be run on machine
+all: pregame database tables tuples query
 
-first:
-	mkdir /home/senior_project/TheTablespace
-	mkdir /home/senior_project/TheTablespaceIndex
-	mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
+pregame:
+	cd /home; mkdir senior_project
+	cd /home; mkdir senior_project/TheTablespace
+	cd /home; mkdir senior_project/TheTablespaceIndex
+	sudo chmod 700 /home/senior_project/*
+	sudo chown _postgres:_postgres /home/senior_project/*
+	sudo mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
 
-compile: Database.cpp
-	g++ -Wall Database.cpp -o Db.out
+database:
+	psql -d postgres -f PSQL/Create_User_Tablespaces.psql
+	
+tables:
+	psql -d TheDatabase -f PSQL/Create_Tables.psql
 
-run: Db.out
-	./Db.out
+tuples:
+	psql -d TheDatabase -f PSQL/Insert_All.psql
 
-clean:
-	rm -rf *.out
+query:
+	psql -d TheDatabase -f PSQL/Query_All.psql
+
+drop:
+	psql -d TheDatabase -f PSQL/Drop_Tables.psql
+
+destroy:
+	psql -d TheDatabase -f PSQL/Drop_USer_Tablespaces.psql
 
 push: .git
 	git add .
