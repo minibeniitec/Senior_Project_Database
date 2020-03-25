@@ -22,6 +22,9 @@ tables:
 tuples:
 	psql -d thedatabase -f Insert_All.psql
 
+grant:
+	psql -d thedatabase -f Grant_All.psql
+
 query:
 	psql -d thedatabase -f Query_All.psql
 
