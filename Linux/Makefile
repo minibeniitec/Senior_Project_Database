@@ -26,7 +26,7 @@ destroy:
 	psql -d postgres -f Drop_User_Tablespaces.psql
 
 endgame:
-	cd /home; rm -fr senior_project
+	cd /home; sudo rm -fr senior_project
 
 push: .git
 	git add .
