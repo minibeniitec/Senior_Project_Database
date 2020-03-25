@@ -4,7 +4,7 @@
        2 | Edwin     | Gonzalez |          |             |        4
        3 | Mabelle   | Cruz     |          |             |        4
        4 | Victor    | Santiago |          |             |        4
-       5 | The       | Guest    |          |             |        1
+       5 | Honored   | Guest    |          |             |        1
 (5 rows)
 
  tableid 
