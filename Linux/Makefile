@@ -5,6 +5,10 @@ pregame:
 	cd /home; sudo mkdir senior_project
 	cd /home; sudo mkdir senior_project/TheTablespace
 	cd /home; sudo mkdir senior_project/TheTablespaceIndex
+	sudo chmod 700 /home/senior_project
+	sudo chown postgres:postgres /home/senior_project
+	sudo chmod 700 /home/senior_project/*
+	sudo chown postgres:postgres /home/senior_project/*
 	sudo mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
 
 database:
