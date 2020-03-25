@@ -3,9 +3,9 @@ all: database tables tuples query
 
 pregame:
 	cd /home; sudo mkdir senior_project
-	cd /home; mkdir senior_project/TheTablespace
-	cd /home; mkdir senior_project/TheTablespaceIndex
-	mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
+	cd /home; sudo mkdir senior_project/TheTablespace
+	cd /home; sudo mkdir senior_project/TheTablespaceIndex
+	sudo mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
 
 database:
 	psql -d postgres -f Create_User_Tablespaces.psql
