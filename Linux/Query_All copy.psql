@@ -1,0 +1,11 @@
+\o SampleData.txt
+
+Select * from Humans;
+Select * from Tables;
+Select * from Orders;
+Select * from TableVisits;
+Select * from Products;
+Select * from Items;
+
+\o
+
