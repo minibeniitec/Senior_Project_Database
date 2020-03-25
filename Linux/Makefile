@@ -8,7 +8,7 @@ pregame:
 	mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
 
 database:
-	psql -f Create_User_Tablespaces.psql
+	psql -d postgres -f Create_User_Tablespaces.psql
 	
 tables:
 	psql -d thedatabase -f Create_Tables.psql
