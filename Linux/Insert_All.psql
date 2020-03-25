@@ -8,11 +8,11 @@
  *      psql -d the database [-U <username> -h 167.172.200.202] -f Insert_All.psql
  */
 
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Benjamin', 'Garza'   );
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Edwin'   , 'Gonzalez');
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Mabelle' , 'Cruz'    );
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (4, 'Victor'  , 'Santiago');
-INSERT INTO Humans (Position, FirstName, LastName, SSN) VALUES (1, 'The'     , 'Guest'   );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Benjamin', 'Garza'   );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Edwin'   , 'Gonzalez');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Mabelle' , 'Cruz'    );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Victor'  , 'Santiago');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (1, 'The'     , 'Guest'   );
 
 
 INSERT INTO Tables (TableID) VALUES (1);

@@ -1,0 +1,13 @@
+/*  	Source: 	Drop_Tables.psql
+ *	Author:		Benjamin A Garza III
+ *	Date:		February 8, 2020
+ *	Class:		CMPS 4928 - Senior Seminar II
+ *	Purpose: 	Drop all tables.
+ *
+ *  Run:
+ *      psql -f Drop_Tables.psql TheDatabase Benjamin
+ *      psql -f Drop_Tables.psql TheDatabase minibeniitec
+ */
+
+drop table if exists humans cascade;
+drop table if exists tables cascade; 

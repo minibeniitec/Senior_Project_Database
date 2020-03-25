@@ -1,0 +1,28 @@
+/*  Source:     Create_User_Tablespaces.sql
+ *  Author:     Benjamin A Garza III
+ *  Date:       February 8, 2020
+ *  Modified:	March 24, 2020
+ *  Class:      CMPS 4928 - Senior Seminar II
+ *  Purpose:    Create tablespaces and database.
+ *
+ *  Run: 
+ *  	psql -d postgres -f Create_User_Tablespaces.psql [-U <username> -h <IP/hostname>]
+ *
+ *  Usage:
+ * 	-h 	If not logged in locally on machine, connects to listed IP address
+ * 	-U 	If not logged in locally on machine, logs you in under given username (will prompt for password)
+ */
+
+CREATE TABLESPACE TheTablespace
+         OWNER minibeniitec
+         LOCATION '/Users/minibeniitec/senior_project/TheTablespace/';
+
+
+CREATE TABLESPACE TheTablespaceIndex
+         OWNER minibeniitec
+         LOCATION '/Users/minibeniitec/senior_project/TheTablespace/TheTablespaceIndex/';
+
+CREATE DATABASE TheDatabase
+        OWNER minibeniitec
+        TABLESPACE = TheTablespace;
+

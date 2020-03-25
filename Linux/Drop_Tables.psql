@@ -10,3 +10,4 @@
  */
 
 drop table if exists humans cascade;
+drop table if exists tables cascade; 

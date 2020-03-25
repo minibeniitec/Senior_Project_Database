@@ -6,7 +6,7 @@
  *  Purpose:    Create tablespaces and database.
  *
  *  Run: 
- *  	psql -d postgres -f Create_User_Tablespaces.psql [-U <username> -h 168.172.200.202]
+ *  	psql -d postgres -f Create_User_Tablespaces.psql [-U <username> -h <IP/hostname>]
  *
  *  Usage:
  * 	-h 	If not logged in locally on machine, connects to listed IP address
@@ -23,7 +23,6 @@ CREATE TABLESPACE TheTablespaceIndex
          LOCATION '/home/senior_project/TheTablespace/TheTablespaceIndex/';
 
 CREATE DATABASE TheDatabase
-        --OWNER minibeniitec
         OWNER benjamin
         TABLESPACE = TheTablespace;
 

@@ -1,0 +1,36 @@
+/*  	Source: 	Insert_All.psql
+ *	Author:		Benjamin A Garza III
+ *	Date:		February 8, 2020
+ *	Class:		CMPS 4928 - Senior Seminar II
+ *	Purpose: 	Insert tuples to all tables as dummy data.
+ *
+ *  Run:
+ *      psql -d the database [-U <username> -h 167.172.200.202] -f Insert_All.psql
+ */
+
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Benjamin', 'Garza'   );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Edwin'   , 'Gonzalez');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Mabelle' , 'Cruz'    );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Victor'  , 'Santiago');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (1, 'The'     , 'Guest'   );
+
+
+INSERT INTO Tables (TableID) VALUES (1);
+INSERT INTO Tables (TableID) VALUES (2);
+INSERT INTO Tables (TableID) VALUES (3);
+INSERT INTO Tables (TableID) VALUES (4);
+
+
+--INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (1, 5, 1);
+--INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (2, 5, 2);
+
+
+--INSERT INTO TableVisit (OrderID) VALUES (1);
+
+
+INSERT INTO Products (Name, Price) VALUES ('Hamburger'     , 1.00);
+INSERT INTO Products (Name, Price) VALUES ('Cheeseburger'  , 1.10);
+INSERT INTO Products (Name, Price) VALUES ('Fountain Drink', 1.10);
+
+
+--INSERT INTO Items (Quantity , ProductID, OrderID) VALUES (1, 1, 1);
