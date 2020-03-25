@@ -22,6 +22,9 @@ grant:
 query:
 	psql -d thedatabase -f Query_All.psql
 
+ungrant:
+	psql -d thedatabase -f Ungrant_All.psql
+
 drop:
 	psql -d thedatabase -f Drop_Tables.psql
 
