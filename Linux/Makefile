@@ -8,7 +8,7 @@ pregame:
 	sudo chmod 700 /home/senior_project
 	sudo chown postgres:postgres /home/senior_project
 	sudo chmod 700 /home/senior_project/TheTablespace
-	sudo chown postgres:postgres /home/senior_project/TheTableSpace
+	sudo chown postgres:postgres /home/senior_project/TheTablespace
 	sudo chmod 700 /home/senior_project/TheTablespaceIndex
 	sudo chown postgres:postgres /home/senior_project/TheTableSpaceIndex
 	sudo mv /home/senior_project/TheTablespaceIndex /home/senior_project/TheTablespace
