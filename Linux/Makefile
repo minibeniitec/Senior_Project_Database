@@ -1,5 +1,9 @@
 # Must be run on machine
-all: database tables tuples query
+all: 
+
+create: pregame database tables tuples query functions
+
+clean: drop destroy endgame
 
 pregame:
 	cd /home; sudo mkdir senior_project
@@ -27,6 +31,9 @@ grant:
 
 query:
 	psql -d thedatabase -f Query_All.psql
+
+functions:
+	psql -d thedatabase -f Create_Functions.psql
 
 ungrant:
 	psql -d thedatabase -f Ungrant_All.psql

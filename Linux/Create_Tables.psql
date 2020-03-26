@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS Humans (
         HumanID         serial primary key not null,
         FirstName       varchar(20) default 'John' not null,
         LastName        varchar(20) default 'Doe' not null,
-        Birthday        date default null,
 	PhoneNumber	integer default null, 
         Position	integer default 1 not null, 	-- 1-4 = Customer, Host, Server, Manager
         CHECK           (Position > 0),
@@ -37,12 +36,13 @@ TABLESPACE TheTablespace;
 
 CREATE TABLE IF NOT EXISTS Orders (
         OrderID         serial primary key not null,
+	PartyName	varchar(20) not null,
 	PartySize	integer not null,
         Date       	date default CURRENT_DATE not null,
-	CustomerID	integer references Humans (HumanID) not null,
-	ServerID	integer references Humans (HumanID) not null,
+	ServerID	integer references Humans (HumanID) default null,
 	TableID		integer references Tables (TableID) default null,
 	CheckInTime	time not null default Current_Time,
+	CheckOutTime	time not null default Current_Time,
 	Experience	integer default null,
 	CHECK 		(PartySize > 0),
         CHECK           (ServerID != CustomerID),
