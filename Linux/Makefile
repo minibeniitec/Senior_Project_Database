@@ -1,7 +1,7 @@
 # Must be run on machine
 all: 
 
-create: pregame database tables tuples query functions
+create: pregame database tables tuples grant query functions
 
 clean: drop destroy endgame
 
