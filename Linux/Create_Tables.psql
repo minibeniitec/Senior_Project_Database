@@ -18,8 +18,7 @@ CREATE TABLE IF NOT EXISTS Humans (
         Position	integer default 1 not null, 	-- 1-4 = Customer, Host, Server, Manager
         CHECK           (Position > 0),
         CHECK           (Position < 5),
-        CHECK           (HumanID > 0),
-        CHECK           (Birthday < (current_date - integer '7665'))
+        CHECK           (HumanID > 0)
 )
 TABLESPACE TheTablespace;
 
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS Orders (
 	CheckOutTime	time not null default Current_Time,
 	Experience	integer default null,
 	CHECK 		(PartySize > 0),
-        CHECK           (ServerID != CustomerID),
         CHECK           (Date <= Current_Date),
 	CHECK 		(Experience > -1),
 	CHECK 		(Experience < 6)
