@@ -1,0 +1,12 @@
+/* Source:      Insert_TableVisit1.psql
+ * Author:      Benjamin A Garza III
+ * Date:        March 26, 2020
+ * Class:       CMPS 4928 - Senior Seminar II
+ * Purpose:     Create all tables.
+ *
+ * Run:
+ *     psql -d thedatabase [-U <username> -h IP/hostname] -f Insert_TableVisit1.psql
+ */
+
+
+INSERT INTO TableVisits (TableID) VALUES (1);

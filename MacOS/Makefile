@@ -1,11 +1,21 @@
 # Must be run on machine
-all: database tables tuples query
+all: 
+
+create: pregame database tables tuples grant query functions
+
+clean: drop destroy endgame
 
 pregame:
 	cd /Users/minibeniitec; mkdir senior_project
 	cd /Users/minibeniitec; mkdir senior_project/TheTablespace
 	cd /Users/minibeniitec; mkdir senior_project/TheTablespaceIndex
 	mv /Users/minibeniitece/senior_project/TheTablespaceIndex /Users/minibeniitec/senior_project/TheTablespace
+
+
+
+
+
+
 
 database:
 	psql -f Create_User_Tablespaces.psql
@@ -21,6 +31,9 @@ grant:
 
 query:
 	psql -d thedatabase -f Query_All.psql
+
+functions:
+	psql -d thedatabase -f Create_Functions.psql
 
 ungrant:
 	psql -d thedatabase -f Ungrant_All.psql

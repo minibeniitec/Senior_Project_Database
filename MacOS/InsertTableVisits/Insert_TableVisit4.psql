@@ -1,0 +1,11 @@
+/* Source:      Insert_TableVisit4.psql
+ * Author:      Benjamin A Garza III
+ * Date:        March 26, 2020
+ * Class:       CMPS 4928 - Senior Seminar II
+ *
+ * Run:
+ *     psql -d thedatabase [-U <username> -h IP/hostname] -f Insert_TableVisit4.psql
+ */
+
+
+INSERT INTO TableVisits (TableID) VALUES (4);

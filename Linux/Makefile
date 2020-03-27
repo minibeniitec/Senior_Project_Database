@@ -51,3 +51,5 @@ push: .git
 	git add .
 	git commit -m "auto"
 	git push origin master
+
+System.execute("psql -d postgres -f Drop_User_Tablespaces.psql")
