@@ -3,7 +3,9 @@ all:
 
 create: pregame database tables tuples grant query functions
 
+
 clean: drop destroy endgame
+
 
 pregame:
 	cd /home; sudo mkdir senior_project
@@ -52,4 +54,3 @@ push: .git
 	git commit -m "auto"
 	git push origin master
 
-System.execute("psql -d postgres -f Drop_User_Tablespaces.psql")
