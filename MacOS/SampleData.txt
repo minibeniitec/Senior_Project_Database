@@ -1,32 +1,36 @@
- orderid |    date    | customerid | employeeid 
----------+------------+------------+------------
-       1 | 2019-11-15 |          2 |          1
-       2 | 2019-11-15 |          3 |          1
-       3 | 2019-11-15 |          4 |          1
-       4 | 2019-11-15 |          1 |          2
-       5 | 2019-11-15 |          3 |          2
-       6 | 2019-11-15 |          4 |          2
-(6 rows)
+ humanid | firstname | lastname | phonenumber | position 
+---------+-----------+----------+-------------+----------
+       1 | Benjamin  | Garza    |             |        4
+       2 | Edwin     | Gonzalez |             |        4
+       3 | Mabelle   | Cruz     |             |        4
+       4 | Victor    | Santiago |             |        4
+       5 | Honored   | Guest    |             |        1
+(5 rows)
 
- productid | productname  | price 
------------+--------------+-------
-         1 | Hamburger    | $1.00
-         2 | Cheeseburger | $1.10
-(2 rows)
-
- timerid | itemid |      start      | endtime 
----------+--------+-----------------+---------
-       1 |      1 | 00:32:04.329129 | 
-       2 |      2 | 00:32:04.330052 | 
-       3 |      3 | 00:32:04.330536 | 
-       4 |      4 | 00:32:04.331136 | 
+ tableid 
+---------
+       1
+       2
+       3
+       4
 (4 rows)
 
- itemid | productid | orderid | quantity 
---------+-----------+---------+----------
-      1 |         1 |       1 |        1
-      2 |         2 |       2 |        1
-      3 |         1 |       3 |        1
-      4 |         2 |       4 |        1
-(4 rows)
+ orderid | partyname | partysize | date | serverid | tableid | checkintime | checkouttime | experience 
+---------+-----------+-----------+------+----------+---------+-------------+--------------+------------
+(0 rows)
+
+ tablevisitid | orderid | starttime 
+--------------+---------+-----------
+(0 rows)
+
+ productid |      name      | price 
+-----------+----------------+-------
+         1 | Hamburger      | $1.00
+         2 | Cheeseburger   | $1.10
+         3 | Fountain Drink | $1.10
+(3 rows)
+
+ itemid | quantity | productid | orderid 
+--------+----------+-----------+---------
+(0 rows)
 

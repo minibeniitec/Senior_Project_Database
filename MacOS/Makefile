@@ -3,19 +3,13 @@ all:
 
 create: pregame database tables tuples grant query functions
 
-clean: drop destroy endgame
+clean: ungrant drop destroy endgame
+
 
 pregame:
 	cd /Users/minibeniitec; mkdir senior_project
 	cd /Users/minibeniitec; mkdir senior_project/TheTablespace
-	cd /Users/minibeniitec; mkdir senior_project/TheTablespaceIndex
-	mv /Users/minibeniitece/senior_project/TheTablespaceIndex /Users/minibeniitec/senior_project/TheTablespace
-
-
-
-
-
-
+	cd /Users/minibeniitec; mkdir senior_project/TheTablespace/TheTablespaceIndex
 
 database:
 	psql -f Create_User_Tablespaces.psql

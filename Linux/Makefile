@@ -4,7 +4,7 @@ all:
 create: pregame database tables tuples grant query functions
 
 
-clean: drop destroy endgame
+clean: unguent drop destroy endgame
 
 
 pregame:
