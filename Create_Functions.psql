@@ -58,9 +58,10 @@ DECLARE
    o_id integer;
 BEGIN
    -- Finds the most recent order with given table assigned.
-   SELECT o_id=MAX(OrderID)
+   SELECT MAX(OrderID)
    FROM Orders
-   WHERE TableID = t_id;
+   WHERE TableID = t_id
+   INTO o_id;
 
    INSERT INTO TableVisits (OrderID)
    VALUES (o_id);
@@ -73,24 +74,24 @@ $BODY$
 
 
 -- Check Last Visit --
--- Params: TableID --
-CREATE OR REPLACE FUNCTION last_visit(t_id integer)
+-- Params: OrderID --
+CREATE OR REPLACE FUNCTION last_visit(o_id integer)
   RETURNS time AS
 $BODY$
 DECLARE
    last_visit time;
 BEGIN
    -- Inserts the new party into the system
-   SELECT last_visit = MAX(StartTime)
+   SELECT MAX(StartTime)
    FROM TableVisits
-   WHERE TableID = t_id;
+   WHERE OrderID = o_id
+   INTO last_visit;
 
    -- Return the new id so we can use it in a select clause or return the new id into the user application
     RETURN last_visit;
 END;
 $BODY$
   LANGUAGE plpgsql VOLATILE;
-
 
 
 -- Party Check Out --
@@ -110,5 +111,19 @@ $BODY$
   LANGUAGE plpgsql VOLATILE;
 
 
+-- Party Check Out --
+-- Param: OrderID, Experience_Rating (1-5)
+CREATE OR REPLACE FUNCTION check_out(o_id integer, exp integer)
+   RETURNS integer AS
+$BODY$
+BEGIN
+   -- Updates the leaving party order
+   UPDATE Orders
+   SET experience = exp, CheckOutTime = Current_Time
+   WHERE OrderID = o_id;
 
+   RETURN 0;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE;
 

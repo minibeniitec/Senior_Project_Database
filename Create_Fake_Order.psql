@@ -1,0 +1,36 @@
+/* Source:      Create_Fake_Order.psql
+ * Author:      Benjamin A Garza III
+ * Date:        April 15, 2020
+ * Class:       CMPS 4928 - Senior Seminar II
+ * Purpose:     Create all tables.
+ *
+ * Run:
+ *     psql -d thedatabase [-U <username> -h IP/hostname] -f Create_Fake_Order.psql
+ */
+
+-- Party of 5 seated to table 1 visited 3 times
+SELECT new_party('Guest 1', 5);
+SELECT seat_party(1, 1, 1);
+SELECT new_table_visit(1);
+SELECT new_table_visit(1);
+SELECT new_table_visit(1);
+
+-- Party of 4 seated to table 2 visited 2 times
+SELECT new_party('Guest 2', 4);
+SELECT seat_party(2, 1, 2);
+SELECT new_table_visit(2);
+SELECT new_table_visit(2);
+
+-- Party of 3 seated to table 3 visited 2 times
+SELECT new_party('Guest 3', 3);
+SELECT seat_party(3, 1, 3);
+SELECT new_table_visit(3);
+SELECT new_table_visit(3);
+
+-- Party of 2 seated to table 4 visited 2 times
+SELECT new_party('Guest 4', 2);
+SELECT seat_party(4, 1, 4);
+SELECT new_table_visit(4);
+
+-- Party of 2 not seated and therefore visited 0 times
+SELECT new_party('Guest 5', 2);
