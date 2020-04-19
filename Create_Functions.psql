@@ -31,24 +31,21 @@ $BODY$
   LANGUAGE plpgsql VOLATILE;
 
 
--- New Party -- 
--- Params: Party Name, Party Size -- 
-CREATE OR REPLACE FUNCTION new_party(pname character varying, psize integer)
+-- Seat Guests --
+-- Param: order_id, server_id, table_id --
+CREATE OR REPLACE FUNCTION seat_party(o_id integer, s_id integer, t_id integer) 
   RETURNS integer AS
 $BODY$
-DECLARE
-   o_id integer;
 BEGIN
-   -- Inserts the new party into the system
-   INSERT INTO Orders(PartyName, PartySize)
-   VALUES (pname, psize)
-   RETURNING OrderID INTO o_id;
-
-   -- Return the new id so we can use it in a select clause or return the new id into the user application
-    RETURN o_id;
+   -- Updates the seated party order
+   UPDATE Orders
+   SET ServerID = s_id, TableID = t_id
+   WHERE OrderID = o_id;
+   RETURN 0;
 END;
 $BODY$
   LANGUAGE plpgsql VOLATILE;
+
 
 
 -- New Table Visit --

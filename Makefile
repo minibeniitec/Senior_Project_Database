@@ -7,7 +7,9 @@ mac: pregame-mac database-mac create
 
 create: tables tuples grant query functions fake
 
-clean: ungrant drop destroy endgame
+clean-mac: ungrant drop destroy endgame-mac
+
+clean-linux: ungrant drop destroy endgame-mac
 
 
 #Mac Specific
@@ -66,8 +68,13 @@ drop:
 destroy:
 	psql -d postgres -f Drop_User_Tablespaces.psql
 
-endgame:
+endgame-mac:
 	cd /Users/minibeniitec/; rm -fr senior_project
+
+
+endgame-linux:
+	cd /home/; sudo rm -fr senior_project
+
 
 push: .git
 	git add .
