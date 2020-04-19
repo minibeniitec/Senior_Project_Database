@@ -12,7 +12,7 @@ INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Benjamin', 'Garza
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Edwin'   , 'Gonzalez');
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Mabelle' , 'Cruz'    );
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Victor'  , 'Santiago');
-INSERT INTO Humans (Position, FirstName, LastName) VALUES (1, 'Honored' , 'Guest'   );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'John'    , 'Doe'     );
 
 
 INSERT INTO Tables (TableID) VALUES (1);
