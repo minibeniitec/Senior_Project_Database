@@ -31,6 +31,14 @@ $BODY$
   LANGUAGE plpgsql VOLATILE;
 
 
+
+-- List Servers -- 
+-- Params: Party Name, Party Size -- 
+CREATE OR REPLACE VIEW list_servers AS
+   SELECT HumanID, FirstName, LastName FROM Humans WHERE Position=3;
+
+
+
 -- Seat Guests --
 -- Param: order_id, server_id, table_id --
 CREATE OR REPLACE FUNCTION seat_party(o_id integer, s_id integer, t_id integer) 
@@ -72,42 +80,24 @@ $BODY$
 
 
 
--- Check Last Visit --
--- Params: OrderID --
-CREATE OR REPLACE FUNCTION last_visit(o_id integer)
-  RETURNS time AS
-$BODY$
-DECLARE
-   last_visit time;
-BEGIN
-   -- Inserts the new party into the system
-   SELECT MAX(StartTime)
-   FROM TableVisits
-   WHERE OrderID = o_id
-   INTO last_visit;
 
-   -- Return the new id so we can use it in a select clause or return the new id into the user application
-    RETURN last_visit;
-END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE;
+-- List Current Orders -- 
+-- Lists all current orders along with 
+CREATE OR REPLACE VIEW list_curr_orders AS
+   SELECT 
+      a.OrderID, e.FirstName, e.LastName, a.PartyName, 
+      a.PartySize, a.TableID, MAX(b.StartTime) lastVisit, MAX(d.StartTime - c.StartTime)
+   FROM Orders a, TableVisits b, TableVisits c, TableVisits d, Humans e
+   WHERE 
+          a.OrderID = b.OrderID 
+      AND a.OrderID = c.OrderID 
+      AND a.OrderID = d.OrderID 
+      AND a.TableID > 0 
+      AND a.CheckoutTime IS NULL 
+      AND a.ServerID = e.HumanID
+   GROUP BY a.OrderID, e.FirstName, e.LastName;
 
 
--- Party Check Out --
--- Param: OrderID, Experience_Rating (1-5)
-CREATE OR REPLACE FUNCTION check_out(o_id integer, exp integer)
-   RETURNS integer AS
-$BODY$
-BEGIN
-   -- Updates the leaving party order
-   UPDATE Orders
-   SET experience = exp, CheckOutTime = Current_Time
-   WHERE OrderID = o_id;
-
-   RETURN 0;
-END;
-$BODY$
-  LANGUAGE plpgsql VOLATILE;
 
 
 -- Party Check Out --

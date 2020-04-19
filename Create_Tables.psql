@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS Orders (
 	ServerID	integer references Humans (HumanID) default null,
 	TableID		integer references Tables (TableID) default null,
 	CheckInTime	time not null default Current_Time,
-	CheckOutTime	time not null default Current_Time,
+	CheckOutTime	time default null,
 	Experience	integer default null,
 	CHECK 		(PartySize > 0),
         CHECK           (Date <= Current_Date),
