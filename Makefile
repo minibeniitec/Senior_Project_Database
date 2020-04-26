@@ -5,7 +5,7 @@ linux: pregame-linux database-linux create
 
 mac: pregame-mac database-mac create
 
-create: tables tuples grant query functions fake
+create: tables tuples functions grant query fake
 
 clean-mac: ungrant drop destroy endgame-mac
 

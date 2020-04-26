@@ -55,7 +55,8 @@ TABLESPACE TheTablespace;
 CREATE TABLE IF NOT EXISTS TableVisits (
         TableVisitID    serial primary key not null,
 	OrderID		integer references Orders (OrderID) not null,
-	StartTime	time not null default Current_Time
+	StartTime	time not null default Current_Time,
+	Wait		time default null
 )
 TABLESPACE TheTablespace;
 

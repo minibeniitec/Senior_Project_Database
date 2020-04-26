@@ -49,6 +49,8 @@ BEGIN
    UPDATE Orders
    SET ServerID = s_id, TableID = t_id
    WHERE OrderID = o_id;
+
+   INSERT INTO TableVisits (OrderID) VALUES (o_id);
    RETURN 0;
 END;
 $BODY$
@@ -69,6 +71,10 @@ BEGIN
    FROM Orders
    WHERE TableID = t_id
    INTO o_id;
+
+   UPDATE TableVisits
+   SET wait = current_time - starttime
+   WHERE OrderID = o_id;
 
    INSERT INTO TableVisits (OrderID)
    VALUES (o_id);
@@ -115,3 +121,41 @@ BEGIN
 END;
 $BODY$
   LANGUAGE plpgsql VOLATILE;
+
+
+
+-- Wait List -- 
+-- Lists all currently waiting parties --
+CREATE OR REPLACE VIEW waitlist AS
+   SELECT 
+   	OrderID, PartyName, PartySize, CheckinTime, (Current_Time - CheckinTime) WaitTime
+   FROM Orders
+   WHERE 
+   	CheckoutTime IS NULL
+	AND TableID IS NULL
+	AND Experience IS NULL
+	AND ServerID IS NULL
+   ORDER BY OrderID ASC;
+
+
+
+
+-- Active List -- 
+-- Lists all currently seated parties --
+CREATE OR REPLACE VIEW activelist AS
+   SELECT 
+   	a.OrderID, a.PartyName, a.PartySize, b.FirstName, a.TableID, MIN(Current_Time - c.starttime) WaitTime, MAX(d.wait) Longest
+   FROM Orders a, Humans b, TableVisits c, TableVisits d
+   WHERE 
+   	a.CheckoutTime IS NULL
+	AND a.TableID IS NOT NULL
+	AND a.Experience IS NULL
+	AND a.ServerID = b.HumanID
+	AND c.OrderID = a.OrderID
+	AND d.OrderID = a.OrderID
+   GROUP BY a.OrderID, b.FirstName
+   ORDER BY a.OrderID;
+
+
+
+
