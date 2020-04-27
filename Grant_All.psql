@@ -1,13 +1,24 @@
 GRANT ALL PRIVILEGES ON DATABASE thedatabase TO mabelle;
+
 GRANT ALL PRIVILEGES ON DATABASE thedatabase TO victor;
+
 GRANT ALL PRIVILEGES ON DATABASE thedatabase TO edwin;
 
 GRANT ALL PRIVILEGES ON TABLE Humans TO mabelle, edwin, victor;
+
 GRANT ALL PRIVILEGES ON TABLE Tables TO mabelle, edwin, victor;
+
 GRANT ALL PRIVILEGES ON TABLE Orders TO mabelle, edwin, victor;
+
 GRANT ALL PRIVILEGES ON TABLE TableVisits TO mabelle, edwin, victor;
+
 GRANT ALL PRIVILEGES ON TABLE Products TO mabelle, edwin, victor;
+
 GRANT ALL PRIVILEGES ON TABLE Items TO mabelle, edwin, victor;
-grant all privileges on function new_party, seat_party, new_table_visit, check_out to edwin, mabelle, victor;
-GRANT ALL PRIVILEGES ON list_curr_orders, list_servers, waitlist, activelist TO edwin, victor, mabelle;
-GRANT USAGE, Select, Update on all sequences in schema public TO edwin, mabelle, victor;
+
+GRANT ALL privileges ON FUNCTION new_party, seat_party, new_table_visit, check_out TO edwin, mabelle, victor;
+
+GRANT ALL PRIVILEGES ON list_curr_orders, list_servers, waitlist, activelist, todays_checkin, todays_experience, todays_wait, todays_meal TO edwin, victor, mabelle;
+
+GRANT USAGE, SELECT, UPDATE ON ALL sequences IN SCHEMA public TO edwin, mabelle, victor;
+

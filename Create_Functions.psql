@@ -7,155 +7,239 @@
  * Run:
  *     psql -d thedatabase [-U <username> -h IP/hostname] -f Create_Tables.sql
  */
+-- New Party --
+-- Params: Party Name, Party Size --
 
-
-
-
--- New Party -- 
--- Params: Party Name, Party Size -- 
-CREATE OR REPLACE FUNCTION new_party(pname character varying, psize integer)
-  RETURNS integer AS
-$BODY$
+CREATE OR REPLACE FUNCTION new_party (pname character varying, psize integer)
+   RETURNS integer
+   AS $BODY$
 DECLARE
    o_id integer;
 BEGIN
    -- Inserts the new party into the system
-   INSERT INTO Orders(PartyName, PartySize)
-   VALUES (pname, psize)
-   RETURNING OrderID INTO o_id;
-
+   INSERT INTO Orders (PartyName, PartySize)
+      VALUES (pname, psize)
+   RETURNING
+      OrderID INTO o_id;
    -- Return the new id so we can use it in a select clause or return the new id into the user application
-    RETURN o_id;
+   RETURN o_id;
 END;
 $BODY$
-  LANGUAGE plpgsql VOLATILE;
+LANGUAGE plpgsql
+VOLATILE;
 
+-- List Servers --
+-- Params: Party Name, Party Size --
 
-
--- List Servers -- 
--- Params: Party Name, Party Size -- 
 CREATE OR REPLACE VIEW list_servers AS
-   SELECT HumanID, FirstName, LastName FROM Humans WHERE Position=3;
-
-
+SELECT
+   HumanID,
+   FirstName,
+   LastName
+FROM
+   Humans
+WHERE
+   Position = 3;
 
 -- Seat Guests --
 -- Param: order_id, server_id, table_id --
-CREATE OR REPLACE FUNCTION seat_party(o_id integer, s_id integer, t_id integer) 
-  RETURNS integer AS
-$BODY$
+
+CREATE OR REPLACE FUNCTION seat_party (o_id integer, s_id integer, t_id integer)
+   RETURNS integer
+   AS $BODY$
 BEGIN
    -- Updates the seated party order
-   UPDATE Orders
-   SET ServerID = s_id, TableID = t_id
-   WHERE OrderID = o_id;
-
-   INSERT INTO TableVisits (OrderID) VALUES (o_id);
+   UPDATE
+      Orders
+   SET
+      ServerID = s_id,
+      TableID = t_id
+   WHERE
+      OrderID = o_id;
+   INSERT INTO TableVisits (OrderID)
+      VALUES (o_id);
    RETURN 0;
 END;
 $BODY$
-  LANGUAGE plpgsql VOLATILE;
-
-
+LANGUAGE plpgsql
+VOLATILE;
 
 -- New Table Visit --
 -- Param: table_id --
-CREATE OR REPLACE FUNCTION new_table_visit(t_id integer)
-  RETURNS integer AS
-$BODY$
+
+CREATE OR REPLACE FUNCTION new_table_visit (t_id integer)
+   RETURNS integer
+   AS $BODY$
 DECLARE
    o_id integer;
 BEGIN
    -- Finds the most recent order with given table assigned.
-   SELECT MAX(OrderID)
-   FROM Orders
-   WHERE TableID = t_id
-   INTO o_id;
-
-   UPDATE TableVisits
-   SET wait = current_time - starttime
-   WHERE OrderID = o_id;
-
+   SELECT
+      MAX(OrderID)
+   FROM
+      Orders
+   WHERE
+      TableID = t_id INTO o_id;
+   UPDATE
+      TableVisits
+   SET
+      wait = CURRENT_TIME - starttime
+   WHERE
+      OrderID = o_id;
    INSERT INTO TableVisits (OrderID)
-   VALUES (o_id);
-
+      VALUES (o_id);
    RETURN 0;
 END;
 $BODY$
-  LANGUAGE plpgsql VOLATILE;
+LANGUAGE plpgsql
+VOLATILE;
 
+-- List Current Orders --
+-- Lists all current orders along with
 
-
-
--- List Current Orders -- 
--- Lists all current orders along with 
 CREATE OR REPLACE VIEW list_curr_orders AS
-   SELECT 
-      a.OrderID, e.FirstName, e.LastName, a.PartyName, 
-      a.PartySize, a.TableID, MAX(b.StartTime) lastVisit, MAX(d.StartTime - c.StartTime)
-   FROM Orders a, TableVisits b, TableVisits c, TableVisits d, Humans e
-   WHERE 
-          a.OrderID = b.OrderID 
-      AND a.OrderID = c.OrderID 
-      AND a.OrderID = d.OrderID 
-      AND a.TableID > 0 
-      AND a.CheckoutTime IS NULL 
-      AND a.ServerID = e.HumanID
-   GROUP BY a.OrderID, e.FirstName, e.LastName;
-
-
-
+SELECT
+   a.OrderID,
+   e.FirstName,
+   e.LastName,
+   a.PartyName,
+   a.PartySize,
+   a.TableID,
+   MAX(b.StartTime) lastVisit,
+   MAX(d.StartTime - c.StartTime)
+FROM
+   Orders a,
+   TableVisits b,
+   TableVisits c,
+   TableVisits d,
+   Humans e
+WHERE
+   a.OrderID = b.OrderID
+   AND a.OrderID = c.OrderID
+   AND a.OrderID = d.OrderID
+   AND a.TableID > 0
+   AND a.CheckoutTime IS NULL
+   AND a.ServerID = e.HumanID
+GROUP BY
+   a.OrderID,
+   e.FirstName,
+   e.LastName;
 
 -- Party Check Out --
 -- Param: OrderID, Experience_Rating (1-5)
-CREATE OR REPLACE FUNCTION check_out(o_id integer, exp integer)
-   RETURNS integer AS
-$BODY$
+
+CREATE OR REPLACE FUNCTION check_out (o_id integer, exp integer)
+   RETURNS integer
+   AS $BODY$
 BEGIN
    -- Updates the leaving party order
-   UPDATE Orders
-   SET experience = exp, CheckOutTime = Current_Time
-   WHERE OrderID = o_id;
-
+   UPDATE
+      Orders
+   SET
+      experience = exp,
+      CheckOutTime = CURRENT_TIME
+   WHERE
+      OrderID = o_id;
    RETURN 0;
 END;
 $BODY$
-  LANGUAGE plpgsql VOLATILE;
+LANGUAGE plpgsql
+VOLATILE;
 
-
-
--- Wait List -- 
+-- Wait List --
 -- Lists all currently waiting parties --
+
 CREATE OR REPLACE VIEW waitlist AS
-   SELECT 
-   	OrderID, PartyName, PartySize, CheckinTime, (Current_Time - CheckinTime) WaitTime
-   FROM Orders
-   WHERE 
-   	CheckoutTime IS NULL
-	AND TableID IS NULL
-	AND Experience IS NULL
-	AND ServerID IS NULL
-   ORDER BY OrderID ASC;
+SELECT
+   OrderID,
+   PartyName,
+   PartySize,
+   CheckinTime,
+   (CURRENT_TIME - CheckinTime) WaitTime
+FROM
+   Orders
+WHERE
+   CheckoutTime IS NULL
+   AND TableID IS NULL
+   AND Experience IS NULL
+   AND ServerID IS NULL
+ORDER BY
+   OrderID ASC;
 
-
-
-
--- Active List -- 
+-- Active List --
 -- Lists all currently seated parties --
+
 CREATE OR REPLACE VIEW activelist AS
-   SELECT 
-   	a.OrderID, a.PartyName, a.PartySize, b.FirstName, a.TableID, MIN(Current_Time - c.starttime) WaitTime, MAX(d.wait) Longest
-   FROM Orders a, Humans b, TableVisits c, TableVisits d
-   WHERE 
-   	a.CheckoutTime IS NULL
-	AND a.TableID IS NOT NULL
-	AND a.Experience IS NULL
-	AND a.ServerID = b.HumanID
-	AND c.OrderID = a.OrderID
-	AND d.OrderID = a.OrderID
-   GROUP BY a.OrderID, b.FirstName
-   ORDER BY a.OrderID;
+SELECT
+   a.OrderID,
+   a.PartyName,
+   a.PartySize,
+   b.FirstName,
+   a.TableID,
+   MIN(CURRENT_TIME - c.starttime) WaitTime,
+   MAX(d.wait) Longest
+FROM
+   Orders a,
+   Humans b,
+   TableVisits c,
+   TableVisits d
+WHERE
+   a.CheckoutTime IS NULL
+   AND a.TableID IS NOT NULL
+   AND a.Experience IS NULL
+   AND a.ServerID = b.HumanID
+   AND c.OrderID = a.OrderID
+   AND d.OrderID = a.OrderID
+GROUP BY
+   a.OrderID,
+   b.FirstName
+ORDER BY
+   a.OrderID;
 
+-- Today Check-Ins --
+-- Lists today's short stats --
 
+CREATE OR REPLACE VIEW todays_checkin AS
+SELECT
+   (SUM(PartySize))
+FROM
+   Orders
+WHERE
+   date = CURRENT_DATE;
 
+-- Today Experiences --
+-- Lists today's short stats --
+
+CREATE OR REPLACE VIEW todays_experience AS
+SELECT
+   (SUM(Experience) / COUNT(*))
+FROM
+   Orders
+WHERE
+   date = CURRENT_DATE;
+
+-- Today Wait Time --
+-- todays average wait time --
+
+CREATE OR REPLACE VIEW todays_wait AS
+SELECT
+   (SUM(wait) / COUNT(*))
+FROM
+   TableVisits
+   INNER JOIN ORDERS ON TableVisits.OrderID = Orders.OrderID
+WHERE
+   wait IS NOT NULL
+   AND date = CURRENT_DATE;
+
+-- Today Meal Time --
+-- today's average meal time stat --
+
+CREATE OR REPLACE VIEW todays_meal AS
+SELECT
+   AVG(Checkouttime - checkintime)
+FROM
+   ORDERS
+WHERE
+   date = CURRENT_DATE
+   AND Checkouttime IS NOT NULL;
 

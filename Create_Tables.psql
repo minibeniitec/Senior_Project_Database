@@ -8,78 +8,58 @@
  * Run:
  *     psql -d thedatabase [-U <username> -h 167.172.200.202] -f Create_Tables.sql
  */
-
-
 CREATE TABLE IF NOT EXISTS Humans (
-        HumanID         serial primary key not null,
-        FirstName       varchar(20) default 'John' not null,
-        LastName        varchar(20) default 'Doe' not null,
-	PhoneNumber	integer default null, 
-        Position	integer default 1 not null, 	-- 1-4 = Customer, Host, Server, Manager
-        CHECK           (Position > 0),
-        CHECK           (Position < 5),
-        CHECK           (HumanID > 0)
-)
+    HumanID serial PRIMARY KEY NOT NULL,
+    FirstName varchar(20) DEFAULT 'John' NOT NULL,
+    LastName varchar(20) DEFAULT 'Doe' NOT NULL,
+    PhoneNumber integer DEFAULT NULL,
+    Position integer DEFAULT 1 NOT NULL, -- 1-4 = Customer, Host, Server, Manager
+    CHECK (Position > 0),
+    CHECK (Position < 5),
+    CHECK (HumanID > 0))
 TABLESPACE TheTablespace;
 
-
-
-Create TABLE IF NOT EXISTS Tables (
-	TableID		serial primary key not null,
-	CHECK		(TableID > 0),
-	CHECK		(TableID < 5)
-)
+CREATE TABLE IF NOT EXISTS Tables (
+    TableID serial PRIMARY KEY NOT NULL,
+    CHECK (TableID > 0),
+    CHECK (TableID < 5))
 TABLESPACE TheTablespace;
-
-
 
 CREATE TABLE IF NOT EXISTS Orders (
-        OrderID         serial primary key not null,
-	PartyName	varchar(20) not null,
-	PartySize	integer not null,
-        Date       	date default CURRENT_DATE not null,
-	ServerID	integer references Humans (HumanID) default null,
-	TableID		integer references Tables (TableID) default null,
-	CheckInTime	time not null default Current_Time,
-	CheckOutTime	time default null,
-	Experience	integer default null,
-	CHECK 		(PartySize > 0),
-        CHECK           (Date <= Current_Date),
-	CHECK 		(Experience > -1),
-	CHECK 		(Experience < 6)
-)
+    OrderID serial PRIMARY KEY NOT NULL,
+    PartyName varchar(20) NOT NULL,
+    PartySize integer NOT NULL,
+    date date DEFAULT CURRENT_DATE NOT NULL,
+    ServerID integer REFERENCES Humans (HumanID) DEFAULT NULL,
+    TableID integer REFERENCES Tables (TableID) DEFAULT NULL,
+    CheckInTime time NOT NULL DEFAULT CURRENT_TIME,
+    CheckOutTime time DEFAULT NULL,
+    Experience integer DEFAULT NULL,
+    CHECK (PartySize > 0),
+    CHECK (date <= CURRENT_DATE),
+    CHECK (Experience > - 1),
+    CHECK (Experience < 6))
 TABLESPACE TheTablespace;
-
-
 
 CREATE TABLE IF NOT EXISTS TableVisits (
-        TableVisitID    serial primary key not null,
-	OrderID		integer references Orders (OrderID) not null,
-	StartTime	time not null default Current_Time,
-	Wait		time default null
-)
+    TableVisitID serial PRIMARY KEY NOT NULL,
+    OrderID integer REFERENCES Orders (OrderID) NOT NULL,
+    StartTime time NOT NULL DEFAULT CURRENT_TIME,
+    Wait time DEFAULT NULL)
 TABLESPACE TheTablespace;
-
-
 
 CREATE TABLE IF NOT EXISTS Products (
-        ProductID       serial primary key not null,
-	Name		varchar(20) unique not null,
-	Price		money not null,
-	CHECK		(price::numeric >= 0.00)
-)
+    ProductID serial PRIMARY KEY NOT NULL,
+    Name varchar(20) UNIQUE NOT NULL,
+    Price money NOT NULL,
+    CHECK (price::numeric >= 0.00))
 TABLESPACE TheTablespace;
-
-
 
 CREATE TABLE IF NOT EXISTS Items (
-        ItemID          serial primary key not null,
-	Quantity	integer not null default 1,
-	ProductID	integer references Products (ProductID) not null,
-	OrderID		integer references Orders (OrderID) not null,
-	CHECK		(Quantity > 0)
-)
+    ItemID serial PRIMARY KEY NOT NULL,
+    Quantity integer NOT NULL DEFAULT 1,
+    ProductID integer REFERENCES Products (ProductID) NOT NULL,
+    OrderID integer REFERENCES Orders (OrderID) NOT NULL,
+    CHECK (Quantity > 0))
 TABLESPACE TheTablespace;
-
-
 

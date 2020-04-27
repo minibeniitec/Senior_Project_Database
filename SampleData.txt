@@ -2,10 +2,15 @@
 ---------+-----------+----------+-------------+----------
        1 | Benjamin  | Garza    |             |        4
        2 | Edwin     | Gonzalez |             |        4
-       3 | Mabelle   | Cruz     |             |        4
-       4 | Victor    | Santiago |             |        4
-       5 | John      | Doe      |             |        3
-(5 rows)
+       3 | Mabelle   | Cruz     |             |        2
+       4 | Victor    | Santiago |             |        3
+       5 | Jay       | Johnson  |             |        3
+       6 | Carina    | Sapling  |             |        3
+       7 | Brandon   | Diaz     |             |        3
+       8 | Arielle   | Von      |             |        3
+       9 | Jill      | Smith    |             |        3
+      10 | John      | Doe      |             |        3
+(10 rows)
 
  tableid 
 ---------

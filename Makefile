@@ -1,6 +1,11 @@
 # Must be run on machine
 all: 
 
+mockdata:
+	g++ Dummy\ Data/Insert_Fake_Data.cpp
+	./a.out
+	rm a.out
+
 linux: pregame-linux database-linux create
 
 mac: pregame-mac database-mac create
@@ -57,7 +62,7 @@ functions:
 	psql -d thedatabase -f Create_Functions.psql
 
 fake:
-	psql -d thedatabase -f Create_Fake_Order.psql
+	psql -d thedatabase -f Insert_Fake_Data.psql
 
 ungrant:
 	psql -d thedatabase -f Ungrant_All.psql

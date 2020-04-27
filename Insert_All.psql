@@ -10,8 +10,13 @@
 
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Benjamin', 'Garza'   );
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Edwin'   , 'Gonzalez');
-INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Mabelle' , 'Cruz'    );
-INSERT INTO Humans (Position, FirstName, LastName) VALUES (4, 'Victor'  , 'Santiago');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (2, 'Mabelle' , 'Cruz'    );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Victor'  , 'Santiago');
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Jay'     , 'Johnson' );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Carina'  , 'Sapling' );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Brandon' , 'Diaz'    );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Arielle' , 'Von'     );
+INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'Jill'    , 'Smith'   );
 INSERT INTO Humans (Position, FirstName, LastName) VALUES (3, 'John'    , 'Doe'     );
 
 
@@ -21,16 +26,6 @@ INSERT INTO Tables (TableID) VALUES (3);
 INSERT INTO Tables (TableID) VALUES (4);
 
 
---INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (1, 5, 1);
---INSERT INTO Orders (CustomerID, EmployeeID, TimerID) VALUES (2, 5, 2);
-
-
---INSERT INTO TableVisit (OrderID) VALUES (1);
-
-
 INSERT INTO Products (Name, Price) VALUES ('Hamburger'     , 1.00);
 INSERT INTO Products (Name, Price) VALUES ('Cheeseburger'  , 1.10);
 INSERT INTO Products (Name, Price) VALUES ('Fountain Drink', 1.10);
-
-
---INSERT INTO Items (Quantity , ProductID, OrderID) VALUES (1, 1, 1);
