@@ -18,7 +18,9 @@ GRANT ALL PRIVILEGES ON TABLE Items TO mabelle, edwin, victor;
 
 GRANT ALL privileges ON FUNCTION new_party, seat_party, new_table_visit, check_out TO edwin, mabelle, victor;
 
-GRANT ALL PRIVILEGES ON list_curr_orders, list_servers, waitlist, activelist, todays_checkin, todays_experience, todays_wait, todays_meal TO edwin, victor, mabelle;
+GRANT ALL PRIVILEGES ON list_curr_orders, list_servers, waitlist, activelist, todays_checkin, todays_experience, todays_wait, todays_meal, server_stats TO edwin, victor, mabelle, minibeniitec;
+
+GRANT ALL PRIVILEGES ON all_checkin, all_experience, all_wait, all_meal, avg_time_rate, date_vs_rate, date_vs_time TO edwin, victor, mabelle, minibeniitec;
 
 GRANT USAGE, SELECT, UPDATE ON ALL sequences IN SCHEMA public TO edwin, mabelle, victor;
 

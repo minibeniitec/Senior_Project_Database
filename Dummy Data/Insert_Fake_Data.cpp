@@ -12,23 +12,23 @@ int main()
     srand(time(NULL));
 
     int size = 1,
-        day = 1,
+        day = 0,
         serverid = 4,
         tableid = 1,
-        inHour = 00,
-        inMinute = 00,
-        outHour = 01,
-        outMinute = 30,
+        inHour = -02,
+        inMinute = 30,
+        outHour = 00,
+        outMinute = 00,
         experience = 1,
         visits = 1,
         time = 0, 
         wait = 0;
 
 
-    for (int i = 0; i < 4000; i++)
+    for (int i = 0; i < 1592; i++)
     {
         size = (int)rand() % 6 + 1;      //Party Size
-        if (i % 154 == 0) { day++; }     //Day   
+        if (i % 60 == 0) { day++; }     //Day   
         serverid = (int)rand() % 7 + 4;  //ServerID
         tableid = i % 4 + 1;             //TableID
         experience = (int)rand() % 5 + 1;//Experience
@@ -47,6 +47,12 @@ int main()
             }
             inHour = (inHour + 1) % 24;
             outHour = (outHour + 1) % 24;            
+        }
+        if(outHour == 00) {
+            inHour = 00;
+            inMinute = 00;
+            outHour = 01;
+            outMinute = 30;
         }
         fout << "INSERT INTO Orders (PartyName, PartySize, Date, ServerID, TableID, CheckinTIme, CheckoutTime, Experience) VALUES (";
         fout << "'Guest', "                                                       //PartyName

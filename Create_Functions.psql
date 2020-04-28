@@ -154,7 +154,7 @@ SELECT
    OrderID,
    PartyName,
    PartySize,
-   CheckinTime,
+   date_trunc('seconds', CheckinTime) CheckinTime,
    (CURRENT_TIME - CheckinTime) WaitTime
 FROM
    Orders
@@ -177,7 +177,7 @@ SELECT
    b.FirstName,
    a.TableID,
    MIN(CURRENT_TIME - c.starttime) WaitTime,
-   MAX(d.wait) Longest
+   GREATEST(MAX(d.wait), MIN(CURRENT_TIME - c.starttime)) Longest
 FROM
    Orders a,
    Humans b,
@@ -212,7 +212,7 @@ WHERE
 
 CREATE OR REPLACE VIEW todays_experience AS
 SELECT
-   (SUM(Experience) / COUNT(*))
+   ROUND(AVG(Experience), 2)
 FROM
    Orders
 WHERE
@@ -223,7 +223,7 @@ WHERE
 
 CREATE OR REPLACE VIEW todays_wait AS
 SELECT
-   (SUM(wait) / COUNT(*))
+   date_trunc('seconds', SUM(wait) / COUNT(*)) wait
 FROM
    TableVisits
    INNER JOIN ORDERS ON TableVisits.OrderID = Orders.OrderID
@@ -236,10 +236,121 @@ WHERE
 
 CREATE OR REPLACE VIEW todays_meal AS
 SELECT
-   AVG(Checkouttime - checkintime)
+   date_trunc('seconds', AVG(date_trunc('seconds', Checkouttime - checkintime))) meal
 FROM
    ORDERS
 WHERE
    date = CURRENT_DATE
    AND Checkouttime IS NOT NULL;
+
+-- Server Stats --
+CREATE OR REPLACE VIEW server_stats AS
+SELECT
+   b.FirstName,
+   b.LastName,
+   date_trunc('seconds', AVG(c.wait)) wait,
+   ROUND(AVG(a.Experience), 2) experience
+FROM
+   Orders a,
+   Humans b,
+   TableVisits c
+WHERE
+   b.position = 3
+   AND a.ServerID = b.HumanID
+   AND a.OrderID = c.OrderID
+GROUP BY
+   b.HumanID
+ORDER BY
+   experience;
+
+-- All Time Check-Ins --
+-- Lists all checkins --
+
+CREATE OR REPLACE VIEW all_checkin AS
+SELECT
+   (SUM(PartySize))
+FROM
+   Orders;
+
+-- All Experiences --
+-- Lists today's short stats --
+
+CREATE OR REPLACE VIEW all_experience AS
+SELECT
+   ROUND(AVG(Experience), 2)
+FROM
+   Orders;
+
+-- All Wait Time --
+-- todays average wait time --
+
+CREATE OR REPLACE VIEW all_wait AS
+SELECT
+   date_trunc('seconds', SUM(wait) / COUNT(*)) wait
+FROM
+   TableVisits
+   INNER JOIN ORDERS ON TableVisits.OrderID = Orders.OrderID
+WHERE
+   wait IS NOT NULL;
+
+-- All Meal Time --
+-- today's average meal time stat --
+
+CREATE OR REPLACE VIEW all_meal AS
+SELECT
+   date_trunc('seconds', AVG(date_trunc('seconds', Checkouttime - checkintime))) meal
+FROM
+   ORDERS
+WHERE
+   Checkouttime IS NOT NULL;
+
+-- Average Time of Rating --
+-- not done --
+
+CREATE OR REPLACE VIEW avg_time_rate AS
+SELECT
+   date_trunc('seconds', AVG(b.wait)) avg
+FROM
+   ORDERS a,
+   TableVisits b
+WHERE
+   Checkouttime IS NOT NULL
+   AND a.ORDERID = b.ORDERID
+GROUP BY
+   a.experience
+ORDER BY
+   a.experience ASC;
+
+-- By Date Rating --
+-- not done --
+
+CREATE OR REPLACE VIEW date_vs_rate AS
+SELECT
+   date,
+   ROUND(AVG(experience),2) avgrating
+FROM
+   ORDERS
+WHERE
+   Checkouttime IS NOT NULL
+GROUP BY
+   date
+ORDER BY
+   date ASC;
+
+-- By Date Rating --
+-- not done --
+
+CREATE OR REPLACE VIEW date_vs_time AS
+SELECT
+   a.date,
+   TRUNC(EXTRACT(EPOCH FROM (AVG(b.wait)))/60) wait
+FROM
+   ORDERS a, TableVisits b
+WHERE
+   Checkouttime IS NOT NULL
+   AND a.OrderID = b.OrderID
+GROUP BY
+   date
+ORDER BY
+   date ASC;
 
